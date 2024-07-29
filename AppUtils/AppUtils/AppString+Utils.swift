@@ -13,9 +13,17 @@ import UIKit
 extension String {
     /// 返回 String 类型的大写加密字符串
     func md5String() -> String {
-        let utf8 = cString(using: .utf8)
+        guard let utf8 = cString(using: .utf8) else { return "" }
         var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
-        CC_MD5(utf8, CC_LONG(utf8!.count - 1), &digest)
+        CC_MD5(utf8, CC_LONG(strlen(utf8)), &digest)
+        return digest.reduce("") { $0 + String(format: "%02X", $1) }
+    }
+    
+    /// 返回 String 类型的大写加密字符串
+    func sha256String() -> String {
+        guard let utf8 = cString(using: .utf8) else { return "" }
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+        CC_SHA256(utf8, CC_LONG(strlen(utf8)), &digest)
         return digest.reduce("") { $0 + String(format: "%02X", $1) }
     }
 
@@ -32,7 +40,7 @@ extension String {
     /// 通过文本字体、宽度和高度范围，计算文本的宽度和高度
     func sizeForFont(width: CGFloat, height: CGFloat, attributes: [NSAttributedString.Key: Any]) -> CGSize {
         let defaultOptions: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
-        let rect = boundingRect(with: CGSize(width: width, height: height), options: defaultOptions, attributes: attributes as [NSAttributedString.Key: Any], context: nil)
+        let rect = self.boundingRect(with: CGSize(width: width, height: height), options: defaultOptions, attributes: attributes as [NSAttributedString.Key: Any], context: nil)
         return CGSize(width: CGFloat(Int(rect.width) + 1), height: CGFloat(Int(rect.height) + 1))
     }
 
