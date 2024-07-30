@@ -3,7 +3,7 @@
 //  AppUtils
 //
 //  Created by bormil on 2020/4/17.
-//  Copyright © 2020 北京卡友在线科技有限公司. All rights reserved.
+//  Copyright © 2020 深眸科技（北京）有限公司. All rights reserved.
 //
 
 import Foundation
@@ -95,7 +95,7 @@ public func AppTopBarHeight() -> CGFloat {
 }
 
 /// TabBar高度
-public let AppTabBarHeight: CGFloat = AppIphoneXS() ? 83.0 : 49.0
+public let AppTabBarHeight: CGFloat = AppiPhoneX() ? AppFootHeight + 49.0 : 49.0
 
 /// NavigationBar高度44.f
 public let AppNavigationBarHeight: CGFloat = 44.0
@@ -116,8 +116,8 @@ public func regexForBang() -> String {
 }
 
 /// 返回布尔值表示当前设备是否是留海屏
-public func AppIphoneXS() -> Bool {
-    return String.AppIphoneXS()
+public func AppiPhoneX() -> Bool {
+    return String.AppiPhoneX()
 }
 
 /// 返回布尔值表示纯数字是否有效

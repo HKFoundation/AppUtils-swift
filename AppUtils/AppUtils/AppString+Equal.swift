@@ -3,7 +3,7 @@
 //  AppUtils
 //
 //  Created by bormil on 2020/4/17.
-//  Copyright © 2020 北京卡友在线科技有限公司. All rights reserved.
+//  Copyright © 2020 深眸科技（北京）有限公司. All rights reserved.
 //
 
 import Foundation
@@ -21,13 +21,13 @@ extension String {
 
     /// 返回当前设备型号
     static func regexForBang() -> String {
-        var pInfo = utsname()
-        uname(&pInfo)
+        var info = utsname()
+        uname(&info)
         var mode = ""
         #if targetEnvironment(simulator)
             mode = ProcessInfo.processInfo.environment["SIMULATOR_MODEL_IDENTIFIER"]!
         #else
-            mode = withUnsafePointer(to: &pInfo.machine.0) { p in
+            mode = withUnsafePointer(to: &info.machine.0) { p in
                 String(cString: p)
             }
         #endif
@@ -56,11 +56,24 @@ extension String {
         case "iPhone12,1": return "iPhone 11"
         case "iPhone12,3": return "iPhone 11 Pro"
         case "iPhone12,5": return "iPhone 11 Pro Max"
-        case"iPhone12,8": return"iPhone SE (2nd generation)"
-        case"iPhone13,1": return"iPhone 12 mini"
-        case"iPhone13,2": return"iPhone 12"
-        case"iPhone13,3": return"iPhone 12 Pro"
-        case"iPhone13,4": return"iPhone 12 Pro Max"
+        case "iPhone12,8": return "iPhone SE (2nd generation)"
+        case "iPhone13,1": return "iPhone 12 mini"
+        case "iPhone13,2": return "iPhone 12"
+        case "iPhone13,3": return "iPhone 12 Pro"
+        case "iPhone13,4": return "iPhone 12 Pro Max"
+        case "iPhone14,4": return "iPhone 13 mini"
+        case "iPhone14,5": return "iPhone 13"
+        case "iPhone14,2": return "iPhone 13 Pro"
+        case "iPhone14,3": return "iPhone 13 Pro Max"
+        case "iPhone14,6": return "iPhone SE (3rd generation)"
+        case "iPhone14,7": return "iPhone 14"
+        case "iPhone14,8": return "iPhone 14 Plus"
+        case "iPhone15,2": return "iPhone 14 Pro"
+        case "iPhone15,3": return "iPhone 14 Pro Max"
+        case "iPhone15,4": return "iPhone 15"
+        case "iPhone15,5": return "iPhone 15 Plus"
+        case "iPhone16,1": return "iPhone 15 Pro"
+        case "iPhone16,2": return "iPhone 15 Pro Max"
         default: return ""
         }
     }
@@ -70,18 +83,16 @@ extension String {
      * ┄┅┄┅┄┅┄┅┄＊ ┄┅┄┅┄┅┄┅┄＊ ┄┅┄┅┄┅┄┅┄*/
 
     /// 返回布尔值表示当前设备是否是留海屏
-    static func AppIphoneXS() -> Bool {
+    static func AppiPhoneX() -> Bool {
         let mode = ["iPhone X",
                     "iPhone XR",
                     "iPhone XS",
                     "iPhone XS Max",
-                    "iPhone 11",
-                    "iPhone 11 Pro",
-                    "iPhone 11 Pro Max",
-                    "iPhone 12 mini",
-                    "iPhone 12",
-                    "iPhone 12 Pro",
-                    "iPhone 12 Pro Max"]
+                    "iPhone 11", "iPhone 11 Pro", "iPhone 11 Pro Max",
+                    "iPhone 12 mini", "iPhone 12", "iPhone 12 Pro", "iPhone 12 Pro Max",
+                    "iPhone 13 mini", "iPhone 13", "iPhone 13 Pro", "iPhone 13 Pro Max",
+                    "iPhone 14", "iPhone 14 Plus", "iPhone 14 Pro", "iPhone 14 Pro Max",
+                    "iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max"]
 
         if mode.contains(regexForBang()) {
             return true
@@ -115,7 +126,7 @@ extension String {
 
     /// 返回布尔值表示手机号码是否有效
     static func regexForPhone(phone: String) -> Bool {
-        let regex = "^1([358][0-9]|4[579]|66|7[0135678]|9[189])[0-9]{8}$"
+        let regex = "^1((3[0-9]|4[0-9]|5[0-9]|6[5-7]|7[0-9]|8[0-9]|9[0-9])\\d{8}|((34[0-8]|349|47|49|48|50|51|52|57|58|59|78|81|89|90|91|98|99)\\d{8}|1349\\d{7}|141\\d{8}|149\\d{8}|165\\d{8}|167\\d{8}|162\\d{8}|170[0-9]\\d{7}|171\\d{8}|172\\d{8}|173\\d{8}|174[0-2]\\d{8}|174[6-9]\\d{8}|1740[0-5]\\d{6}|175\\d{8}|176\\d{8}|177\\d{8}|178\\d{8}|179\\d{8}|180\\d{8}|181\\d{8}|182\\d{8}|183\\d{8}|184\\d{8}|185\\d{8}|186\\d{8}|187\\d{8}|188\\d{8}|189\\d{8}|190\\d{8}|191\\d{8}|192\\d{8}|193\\d{8}|195\\d{8}|196\\d{8}|197\\d{8}|198\\d{8}|199\\d{8}))$"
         return regexForCommon(common: regex, value: phone)
     }
 
