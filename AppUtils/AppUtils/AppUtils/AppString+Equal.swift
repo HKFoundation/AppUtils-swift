@@ -177,11 +177,11 @@ extension String {
         }
 
         /// 4.如果生日日期无效，返回false
-        let bday = computed[computed.index(computed.startIndex, offsetBy: 6) ..< computed.index(computed.startIndex, offsetBy: 14)]
+        let birthday = computed[computed.index(computed.startIndex, offsetBy: 6) ..< computed.index(computed.startIndex, offsetBy: 14)]
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYYMMdd"
 
-        guard formatter.date(from: String(bday)) != nil else {
+        guard formatter.date(from: String(birthday)) != nil else {
             return false
         }
 
