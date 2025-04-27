@@ -6,35 +6,31 @@
 //  Copyright © 2020 深眸科技（北京）有限公司. All rights reserved.
 //
 
-import CommonCrypto
+import CryptoKit
 import Foundation
 import UIKit
 
 extension String {
     /// 返回 String 类型的大写加密字符串
     func md5String() -> String {
-        guard let utf8 = cString(using: .utf8) else { return "" }
-        var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
-        CC_MD5(utf8, CC_LONG(strlen(utf8)), &digest)
-        return digest.reduce("") { $0 + String(format: "%02X", $1) }
+        let digest = Insecure.MD5.hash(data: self.data(using: .utf8) ?? Data())
+        return digest.compactMap { String(format: "%02X", $0) }.joined()
     }
-    
+
     /// 返回 String 类型的大写加密字符串
     func sha256String() -> String {
-        guard let utf8 = cString(using: .utf8) else { return "" }
-        var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
-        CC_SHA256(utf8, CC_LONG(strlen(utf8)), &digest)
-        return digest.reduce("") { $0 + String(format: "%02X", $1) }
+        let digest = SHA256.hash(data: Data(self.utf8))
+        return digest.compactMap { String(format: "%02X", $0) }.joined()
     }
 
     /// 通过文本字体，计算文本的宽度
     func widthForFont(font: UIFont) -> CGFloat {
-        return sizeForFont(width: CGFloat(HUGE), height: CGFloat(HUGE), attributes: [NSAttributedString.Key.font: font]).width
+        return self.sizeForFont(width: CGFloat(HUGE), height: CGFloat(HUGE), attributes: [NSAttributedString.Key.font: font]).width
     }
 
     /// 通过文本字体、文本宽度，计算文本的高度
     func heightForFont(font: UIFont, width: CGFloat) -> CGFloat {
-        return sizeForFont(width: width, height: CGFloat(HUGE), attributes: [NSAttributedString.Key.font: font]).height
+        return self.sizeForFont(width: width, height: CGFloat(HUGE), attributes: [NSAttributedString.Key.font: font]).height
     }
 
     /// 通过文本字体、宽度和高度范围，计算文本的宽度和高度
