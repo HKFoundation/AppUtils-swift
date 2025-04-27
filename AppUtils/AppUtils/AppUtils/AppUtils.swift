@@ -111,8 +111,8 @@ public let AppFootHeight: CGFloat = (UIApplication.shared.delegate as? AppDelega
  * ┄┅┄┅┄┅┄┅┄＊ ┄┅┄┅┄┅┄┅┄＊ ┄┅┄┅┄┅┄┅┄*/
 
 /// 返回当前设备型号
-public func regexForBang() -> String {
-    return String.regexForBang()
+public func regexTypeOfMachine() -> String {
+    return String.regexTypeOfMachine()
 }
 
 /// 返回布尔值表示当前设备是否是留海屏
@@ -121,28 +121,28 @@ public func AppiPhoneX() -> Bool {
 }
 
 /// 返回布尔值表示纯数字是否有效
-public func regexForDigit(digit: String) -> Bool {
-    return String.regexForDigit(digit: digit)
+public func regexDigit(digit: String) -> Bool {
+    return String.regexDigit(digit: digit)
 }
 
 /// 返回布尔值表示邮箱是否有效
-public func regexForEmail(email: String) -> Bool {
-    return String.regexForEmail(email: email)
+public func regexEmail(email: String) -> Bool {
+    return String.regexEmail(email: email)
 }
 
 /// 返回布尔值表示手机号码是否有效
-public func regexForPhone(phone: String) -> Bool {
-    return String.regexForPhone(phone: phone)
+public func regexPhone(phone: String) -> Bool {
+    return String.regexPhone(phone: phone)
 }
 
 /// 返回布尔值表示车牌号码是否有效
-public func regexForCar(car: String) -> Bool {
-    return String.regexForCar(car: car)
+public func regexCar(car: String) -> Bool {
+    return String.regexCar(car: car)
 }
 
 /// 返回布尔值表示身份证号码是否有效
-public func regexForCard(card: String) -> Bool {
-    return String.regexForCard(card: card)
+public func regexCard(card: String) -> Bool {
+    return String.regexCard(card: card)
 }
 
 /* ┄┅┄┅┄┅┄┅┄＊ ┄┅┄┅┄┅┄┅┄＊ ┄┅┄┅┄┅┄┅┄*
